@@ -39,8 +39,17 @@ app.use('/', defaultRouter);
 // Express-Sitemap Logic
 //-----------------------------------------------------------------------------
 var sitemap = require('express-sitemap');
-sitemap = sitemap();
-sitemap.generate4(app);
+sitemap = sitemap({
+                    url: 'http://example.com',
+                    route: {
+                        '/': {
+                            lastmod: '2015-02-22',
+                            changefreq: 'weekly',
+                            priority: '0.5',
+                        },
+                    },
+                   });
+sitemap.generate(app, ['/']);
 sitemap.toFile();
 //-----------------------------------------------------------------------------
 
